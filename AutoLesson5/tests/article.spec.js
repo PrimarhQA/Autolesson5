@@ -1,9 +1,8 @@
-﻿    import { test, expect } from '@playwright/test';
-//import { MainPage, RegisterPage, YourFeedPage, GlobalFeedPage } from '../src/pages/index';
+﻿import { test, expect } from '@playwright/test';
 import { UserBuilder } from '../src/helpers/user.builders';
 import { ArticleBuilder } from '../src/helpers/article.builders';
-import { App } from '../src/pages/app.page'
-
+import { App } from '../src/pages/app.page';
+import { MyPage } from '../src/pages/MyPage.js';
 
 
 test('Создание статьи авторизованным пользователем', async ({page}) => {
@@ -58,7 +57,9 @@ test('Проставить лайк статье из раздела Global Feed
     await app.main.open();
     await app.globalFeed.open();
     await app.globalFeed.likePost();
-    await expect(page.getByRole('button', { name: '( 1 )' })).toBeVisible();
+    const myPage = new MyPage(page);
+
+    await expect(myPage.cartCounterButton()).toBeVisible();
 })
 
 test('Фильтрация статей по популярному тэгу', async ({page}) => {

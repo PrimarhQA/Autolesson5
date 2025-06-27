@@ -1,5 +1,4 @@
 ﻿import { test, expect } from '@playwright/test';
-//import { MainPage, RegisterPage, YourFeedPage, ArticleBuilder, NewArticlePage  } from '../src/pages/index';
 import { UserBuilder } from '../src/helpers/user.builders';
 import { App } from '../src/pages/app.page'
 
