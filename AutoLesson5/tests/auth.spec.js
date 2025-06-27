@@ -1,6 +1,7 @@
 ﻿import { test, expect } from '@playwright/test';
 import { UserBuilder } from '../src/helpers/user.builders';
 import { App } from '../src/pages/app.page'
+import {LoginPage} from '../src/pages/yoursettings.page.js'
 
 test('Выход из учетной записи юзера', async ({ page }) => {
     const randomUser = new UserBuilder()
@@ -16,5 +17,6 @@ test('Выход из учетной записи юзера', async ({ page }) 
     await expect(app.yourFeed.profileNameField).toContainText(randomUser.username);
 
     await app.navigation.clickLogoutButton();
-    await expect(page.getByRole('link', { name: 'Login' })).toBeVisible();
+    const isVisible = await LoginPage.isLoginLinkVisible();
+    await expect(isVisible).toBe(true);
 })

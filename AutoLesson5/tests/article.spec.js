@@ -3,7 +3,8 @@ import { UserBuilder } from '../src/helpers/user.builders';
 import { ArticleBuilder } from '../src/helpers/article.builders';
 import { App } from '../src/pages/app.page';
 import { MyPage } from '../src/pages/MyPage.js';
-
+import {ArticlePage} from '../src/pages/MyPage.js';
+import {AdvertisementPage} from '../src/pages/MyPage.js';
 
 test('Создание статьи авторизованным пользователем', async ({page}) => {
 
@@ -28,7 +29,9 @@ test('Создание статьи авторизованным пользов�
 
     await app.newArticle.open();
     await app.newArticle.newArticle(randomArticle);
-    await expect(page.getByRole('button', { name: 'Delete Article' }).first()).toBeVisible();
+    const articlePage = new ArticlePage(page);
+
+  await expect(articlePage.deleteArticleButtonFirst()).toBeVisible();
 })
 
 
@@ -67,5 +70,8 @@ test('Фильтрация статей по популярному тэгу', a
     
     await app.main.open();
     await app.main.popularTagButtonClick();
-    await expect(page.getByRole('button', { name: 'реклама' }).first()).toBeVisible();
+    const advPage = new AdvertisementPage(page);
+
+  await expect(advPage.firstAdvertisementButton()).toBeVisible();
+
 })

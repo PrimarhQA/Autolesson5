@@ -36,3 +36,17 @@
         await this.upDateSettingsButton.click();
     }
 }
+
+class LoginPage {
+    page
+  constructor(page) {
+    this.page = page;
+    this.loginLink = page.getByRole('link', { name: 'Login' });
+  }
+
+  async isLoginLinkVisible() {
+    return await this.loginLink.isVisible();
+  }
+}
+
+export  {LoginPage};
