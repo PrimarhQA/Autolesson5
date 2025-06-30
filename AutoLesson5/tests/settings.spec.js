@@ -1,8 +1,8 @@
 import { test, expect } from '@playwright/test';
 import { UserBuilder } from '../src/helpers/user.builders';
-import { App } from '../src/pages/app.page'
+import { App } from '../src/pages/app.page';
 
-test('Смена имени пользователя', async ({ page }) => {
+test('rename', async ({ page }) => {
 
     const randomUser = new UserBuilder()
         .addEmail()
@@ -19,5 +19,5 @@ test('Смена имени пользователя', async ({ page }) => {
 
     await app.yourSettings.open();
     await app.yourSettings.changeUserName(randomUser);
-    await expect(page.getByRole('navigation')).toContainText(randomUser.username);
+    await expect(app.yourSettings.profileNameField).toContainText(randomUser.username);
 })
